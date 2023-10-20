@@ -1,6 +1,7 @@
 package com.example.myfirstapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,8 @@ import com.example.myfirstapp.databinding.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
 
-private FragmentFirstBinding binding;
-
-    TextView showCountTextView;
+    private FragmentFirstBinding binding;
+    private TextView showCountTextView;
 
     @Override
     public View onCreateView(
@@ -34,6 +34,8 @@ private FragmentFirstBinding binding;
         view.findViewById(R.id.random_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TestCaseLog", "Test Case 1: Navigation from FirstFragment to SecondFragment");
+                Log.d("TestCaseLog", "Clicking random button...");
                 int currentCount = Integer.parseInt(showCountTextView.getText().toString());
                 FirstFragmentDirections.ActionFirstFragmentToSecondFragment action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(currentCount);
                 NavHostFragment.findNavController(FirstFragment.this).navigate(action);
@@ -51,12 +53,14 @@ private FragmentFirstBinding binding;
         view.findViewById(R.id.count_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TestCaseLog", "Test Case 2: Increase count in FirstFragment");
                 countMe(view);
+                Log.d("TestCaseLog", "Updated count in FirstFragment: " + showCountTextView.getText().toString());
             }
         });
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
@@ -68,5 +72,4 @@ private FragmentFirstBinding binding;
         count++;
         showCountTextView.setText(count.toString());
     }
-
 }

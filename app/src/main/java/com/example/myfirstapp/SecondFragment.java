@@ -1,6 +1,7 @@
 package com.example.myfirstapp;
 
 import android.os.Bundle;
+import android.util.Log;  // <-- Import Log class
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.myfirstapp.databinding.FragmentSecondBinding;
-//import androidx.navigation.fragment.navArgs;
 
 import java.util.Random;
 
 public class SecondFragment extends Fragment {
 
-private FragmentSecondBinding binding;
+    private FragmentSecondBinding binding;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-      binding = FragmentSecondBinding.inflate(inflater, container, false);
-      return binding.getRoot();
-
+        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -43,22 +41,25 @@ private FragmentSecondBinding binding;
             randomNumber = random.nextInt(count + 1);
         }
 
+        Log.d("TestCaseLog", "Test Case 3: Displaying random number in SecondFragment");
+        Log.d("TestCaseLog", "Generated random number: " + randomNumber);
+
         TextView randomView = view.getRootView().findViewById(R.id.textview_random);
         randomView.setText(randomNumber.toString());
 
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TestCaseLog", "Test Case 4: Navigation from SecondFragment to FirstFragment");
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }
