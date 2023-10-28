@@ -69,10 +69,18 @@ fun ConverterScreen() {
                         .padding(16.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Text(
-                        text = "Ashish Padma",
-                        color = Color.Black
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Ashish Padma",
+                            color = Color.Black
+                        )
+                        Text(
+                            text = "Meter Converter App",
+                            color = Color.Gray
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +121,6 @@ fun ConverterScreen() {
         }
     }
 }
-
 fun metersToMillimeters(meters: String): String {
     return try {
         val mm = meters.toDouble() * 1000
